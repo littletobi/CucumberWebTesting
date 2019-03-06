@@ -3,7 +3,6 @@ Feature: Google homepage
   This feature verifies the functionality on Google Homepage
 
   Scenario: Check that main elements on Google Homepage are displayed
-  //   Given I launch the browser Chrome
     When I open Google Homepage
     Then I verify that the page displays search text box
     And the page displays Google Search button
@@ -11,7 +10,6 @@ Feature: Google homepage
 
   @web
   Scenario Outline: Check that search functionality works
-  // Given I launch the browser <browser>
     When I open Google Homepage
     And I search for information about my favorite football club <clubName>
     Then I should get wiki page about the club <clubName>
@@ -21,5 +19,3 @@ Feature: Google homepage
 #      |  "Barcelona"   |
 #      |  "Real Madryt" |
       | "Real Madryt" |
-#
-##  --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvmSMFormatter

@@ -28,10 +28,8 @@ public class StepDefs_GooglePage {
 
     @When("^I open Google Homepage$")
     public void i_open_Google_Homepage() throws Exception {
-        //PageFactory.initElements(driver, GooglePage.class);
         driver.get("http://google.pl");
-      //  driver.manage().window().fullscreen();
-        assertTrue(driver.getCurrentUrl().contains("www.google.com"));
+        assertTrue(driver.getCurrentUrl().contains("www.google."));
     }
 
     @Then("^I verify that the page displays search text box$")

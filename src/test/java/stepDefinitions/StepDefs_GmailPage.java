@@ -30,16 +30,19 @@ public class StepDefs_GmailPage {
     //Background
     @Given("^User is on gmail page$")
     public void userIsOnGmailPage() {
-        driver.get("http://gmail.com");
+        driver.get("https://accounts.google.com");
         assertTrue(driver.getCurrentUrl().contains("https://accounts.google.com"));
     }
 
     @When("^User try to login with credentials from datatable$")
     public void userTryToLoginWithCredentialsFromDatatable(DataTable loginData) {
+        waiter = new WebDriverWait(driver, 15);
         List<String> data = loginData.asList(String.class);
         GmailPage.identifierInput.sendKeys(data.get(0));
         GmailPage.nextBtn.click();
         PageFactory.initElements(driver, GmailPage.GmailConfirmation.class);
+        waiter.until(ExpectedConditions.elementToBeClickable(GmailPage.GmailConfirmation.passwordVisibleIcon));
+        GmailPage.GmailConfirmation.passwordVisibleIcon.click();
         GmailPage.GmailConfirmation.passwordInput.sendKeys(data.get(0));
         GmailPage.GmailConfirmation.confirmationPasswdBtn.click();
     }
@@ -55,6 +58,18 @@ public class StepDefs_GmailPage {
         GmailPage.GmailConfirmation.passwordVisibleIcon.click();
         GmailPage.GmailConfirmation.passwordInput.sendKeys(data.get(0).get("password"));
         GmailPage.GmailConfirmation.confirmationPasswdBtn.click();
+
+//        Below is when we want to pass test data more than once
+//        waiter = new WebDriverWait(driver, 15);
+//        for (Map<String, String> dataList : loginData.asMaps(String.class, String.class)) {
+//            GmailPage.identifierInput.sendKeys(dataList.get("credentials"));
+//            GmailPage.nextBtn.click();
+//            PageFactory.initElements(driver, GmailPage.GmailConfirmation.class);
+//            waiter.until(ExpectedConditions.elementToBeClickable(GmailPage.GmailConfirmation.passwordVisibleIcon));
+//            GmailPage.GmailConfirmation.passwordVisibleIcon.click();
+//            GmailPage.GmailConfirmation.passwordInput.sendKeys(dataList.get("password"));
+//            GmailPage.GmailConfirmation.confirmationPasswdBtn.click();
+//        }
     }
 
     @Then("^Error message is displayed$")
