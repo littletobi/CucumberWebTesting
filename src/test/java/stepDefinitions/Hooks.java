@@ -3,6 +3,7 @@ package stepDefinitions;
         import cucumber.api.Scenario;
         import cucumber.api.java.After;
         import cucumber.api.java.Before;
+        import helpers.RestAssuredExtensions;
         import org.apache.logging.log4j.LogManager;
         import org.apache.logging.log4j.Logger;
         import org.openqa.selenium.OutputType;
@@ -25,14 +26,14 @@ public class Hooks {
 
     public static WebDriver driver;
 
-//    private static final Thread CLOSE_THREAD = new Thread() {
-//        @Override
-//        public void run() {
-//            driver.close();
-//        }
-//    };
-
     private String path = System.getProperty("user.dir");
+
+    @Before("@api")
+    public void TestSetup() {
+        String baseUri = "http://localhost:3000/";
+        RestAssuredExtensions restAssuredExtensions = new RestAssuredExtensions(baseUri);
+//        RestAssuredExtensions restAssuredExtensions = new RestAssuredExtensions();
+    }
 
     @Before("@web")
 
@@ -83,7 +84,7 @@ public class Hooks {
         driver.manage().deleteAllCookies();
     }
 
-    @After
+    @After("@web")
     public void embedScreenshot(Scenario scenario) {
         if (scenario.isFailed()) {
             try {

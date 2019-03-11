@@ -1,0 +1,87 @@
+{
+  "people": [
+    {
+      "id": 1,
+      "firstName": "Bill",
+      "lastName": "Gates",
+      "email": "bill@microsoft.com"
+    },
+    {
+      "id": 2,
+      "firstName": "Mark",
+      "lastName": "Zuckerberg",
+      "email": "mark@facebook.com"
+    },
+    {
+      "id": 3,
+      "firstName": "Jeff",
+      "lastName": "Bezos",
+      "email": "jeff@amazon.com"
+    },
+    {
+      "id": 4,
+      "firstName": "Tobi",
+      "lastName": "Kenobi"
+    },
+    {
+      "email": "olivier@mail.com",
+      "password": "bestPassw0rd",
+      "id": 5
+    }
+  ],
+  "companies": [
+    {
+      "id": 1,
+      "name": "Microsoft"
+    },
+    {
+      "id": 2,
+      "name": "Facebook"
+    },
+    {
+      "id": 3,
+      "name": "Amazon"
+    },
+    {
+      "id": 4,
+      "name": "Testing"
+    }
+  ],
+  "hobbies": [
+    {
+      "id": 1,
+      "hobby": [
+        "Drinking",
+        "Smoking",
+        "Eating",
+        "Sleeping"
+      ]
+    },
+    {
+      "id": 3,
+      "name": [
+        "Horse riding",
+        "Selling things",
+        "Drinking"
+      ]
+    },
+    {
+      "id": 4,
+      "hobby": [
+        "Testing",
+        "Reading books",
+        "Drinking",
+        "Eating"
+      ]
+    },
+    {
+      "name": "asasdadaf",
+      "companyId": "2",
+      "id": 5
+    }
+  ],
+  "countries": {
+    "countryName": "Jamaica",
+    "userId": "11"
+  }
+}

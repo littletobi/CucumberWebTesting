@@ -11,13 +11,13 @@ public class GooglePage extends BaseClass {
         super(driver);
     }
 
-    @FindBy(how = How.CLASS_NAME, using = "gLFyf")
+    @FindBy(how = How.XPATH, using = "//input[@name='q']")
     public static WebElement searchTextBox;
 
-    @FindBy(how = How.CSS, using = ".FPdoLc.VlcLAe input:nth-child(1)")
+    @FindBy(how = How.XPATH, using = "//input[@type=\"submit\"][1]")
     public static WebElement searchButton;
 
-    @FindBy(how = How.CSS, using = ".FPdoLc.VlcLAe input:nth-child(1)")
+    @FindBy(how = How.XPATH, using = "//input[@type=\"submit\"][2]")
     public static WebElement luckyButton;
 
     @FindBy(how = How.CSS, using = ".gb_e.gb_f")
