@@ -22,12 +22,12 @@ public class RestAssuredJsonServerSteps {
 
     private static ResponseOptions<Response> response;
 
-    @Given("^I perform GET operation for (.*) url$")
+    @Given("^I perform GET operation for ([^\"]*) url$")
     public void iPerformGETOperationForUrl(String url) {
         response = RestAssuredExtensions.GetOps(url);
     }
 
-    @And("^I perform GET operation with path parameter for url \"([^\"]*)\"$")
+    @And("^I perform GET operation with path parameter for url ([^\"]*)$")
     public void iPerformGETOperationWithPathParameterForUrl(String url, DataTable table) {
         List<Map<String, String>> data = table.asMaps(String.class, String.class);
         HashMap<String, String> pathParams = new HashMap<>();
@@ -35,7 +35,7 @@ public class RestAssuredJsonServerSteps {
         response = RestAssuredExtensions.GetOpsWithPathParameter(url, pathParams);
     }
 
-    @Then("^There should be user with first name (.+) last name (.+) and email (.+)$")
+    @Then("^There should be user with first name ([^\"]*) last name ([^\"]*) and email ([^\"]*)$")
     public void ThereShouldBeUserWithFirstNameLastNameAndEmail(String firstName, String lastName, String email) throws Throwable {
         assertThat(response.getBody().jsonPath().getString("firstName"), containsString(firstName)); //hamcrest
         assertEquals(true, response.getBody().jsonPath().get("lastName").equals(lastName));
@@ -51,7 +51,7 @@ public class RestAssuredJsonServerSteps {
         assertThat(response.getBody().jsonPath().get("firstName"), hasItems("Bill", "Tobi", "Mark")); //hamcrest
     }
 
-    @Given("^I perform POST operation for url \"([^\"]*)\" with body$")
+    @Given("^I perform POST operation for url ([^\"]*) with body$")
     public void iPerformPOSTOperationForUrlUsersIdWithBody(String url, DataTable table) throws Throwable {
         List<Map<String, String>> data = table.asMaps(String.class, String.class);
         //Set body
@@ -67,8 +67,9 @@ public class RestAssuredJsonServerSteps {
         response = RestAssuredExtensions.PostOpsWithBodyAndPathParams(url, pathParams, bodyParams);
     }
 
-    @Then("^I should see the body has first name \"([^\"]*)\" and lastName \"([^\"]*)\"$")
+    @Then("^I should see the body has first name ([^\"]*) and lastName ([^\"]*)$")
     public void iShouldSeeTheBodyHasFirstNameAndLastName(String firstName, String lastName) throws Throwable {
+        assertEquals(response.getStatusCode(), 201);
         assertThat(response.getBody().jsonPath().get("firstName"), equalTo(firstName));
         assertThat(response.getBody().jsonPath().get("lastName"), equalTo(lastName));
     }
@@ -86,13 +87,13 @@ public class RestAssuredJsonServerSteps {
         response = RestAssuredExtensions.PostOpsWithBodyAndPathParams(url, pathParams, bodyParams);
     }
 
-    @Then("^I should see the body has country name \"([^\"]*)\"$")
+    @Then("^I should see the body has country name ([^\"]*)$")
     public void iShouldSeeTheBodyHasCountry(String countryName) {
         assertThat(response.getBody().jsonPath().get("countryName"), equalTo(countryName));
     }
 
 
-    @When("^I perform DELETE  operation for  url \"([^\"]*)\"$")
+    @When("^I perform DELETE  operation for  url ([^\"]*)$")
     public void iPerformDELETEOperationForUrl(String url, DataTable table) {
         List<Map<String, String>> data = table.asMaps(String.class, String.class);
         HashMap<String, String> pathParams = new HashMap<>();
@@ -101,13 +102,13 @@ public class RestAssuredJsonServerSteps {
         RestAssuredExtensions.DeleteOpsWithPathParams(url, pathParams);
     }
 
-    @Then("^There should not be user with first name \"([^\"]*)\" and last name \"([^\"]*)\"$")
+    @Then("^There should not be user with first name ([^\"]*) and last name ([^\"]*)$")
     public void thereShouldNotBeUserWithFirstNameAndLastName(String firstName, String lastName) {
         assertNotEquals(response.getBody().jsonPath().get("firstName"), firstName);
         assertNotEquals(response.getBody().jsonPath().get("lastName"), lastName);
     }
 
-    @Given("^I perform authentication operation for \"([^\"]*)\"$")
+    @Given("^I perform authentication operation for ([^\"]*)$")
     public void iPerformAuthenticationOperationFor(String url, DataTable table) {
         List<Map<String, String>> data = table.asMaps(String.class, String.class);
         HashMap<String, String> bodyParams = new HashMap<>();
@@ -117,7 +118,7 @@ public class RestAssuredJsonServerSteps {
         response = RestAssuredExtensions.PostOpsWithBodyAndPathParams(url, pathParams, bodyParams);
     }
 
-    @When("^I perform GET operation for \"([^\"]*)\" url with token$")
+    @When("^I perform GET operation for ([^\"]*) url with token$")
     public void iPerformGETOperationForUrlWithToken(String url) {
         response = RestAssuredExtensions.GetOpsWithToken(url, response.getBody().jsonPath().get("access_token"));
     }
